@@ -1,18 +1,15 @@
 const express = require("express");
 require("dotenv").config();
 var cors = require("cors");
-const bodyParser = require("body-parser");
 var app = express();
-app.use(express.urlencoded());
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 const PORT = 8000;
 
 const stripe = require("stripe")(process.env.STRIPE_KEY);
 app.post("/create-checkout-session", async (req, res) => {
-  
-  const data=req.body.data;
-  let amount=data.amount;
+  const data = req.body.data;
+  let amount = data.amount;
   const session = await stripe.checkout.sessions.create({
     line_items: [
       {
