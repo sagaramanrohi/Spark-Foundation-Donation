@@ -1,8 +1,10 @@
 const express = require("express");
 require("dotenv").config();
 var cors = require("cors");
+const bodyParser = require("body-parser");
 var app = express();
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded());
+app.use(bodyParser.json());
 app.use(cors());
 const PORT = 8000;
 
